@@ -18,7 +18,23 @@ function newNoteMaker(body, noteArray){
       path.join(__dirname, './db/db.json'),
       JSON.stringify({notes: noteArray}, null,2)
     )
-    return newNote
+    return newNote;
+}
+
+// delete note and json join and stringify 
+function deleteNote(id, notes) {
+    const noteId =id;
+    notes.splice(noteId, 1)
+    for(i=0; i < notes.length; i++) {
+      notes[i].id = '' + i + '';
+    }
+     
+
+    fs.writeFileSync(
+      path.join(_dirname, './db/db.json'),
+      JSON.stringify({notes: notes}, null, 2)
+    )
+    return notes;
 }
 
 
