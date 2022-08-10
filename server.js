@@ -1,5 +1,5 @@
 // added this file in root was not in starter code 
-
+const PORT = process.env.PORT || 3001;
 const express = require('express');
 const app = express();
 const fs =require('fs');
@@ -14,8 +14,10 @@ app.use(express.urlencoded({extended: true}))
 function newNoteMaker(body, noteArray){
     const newNote = body;
     noteArray.push(newNote);
+  
+
     fs.writeFilesSync(
-      path.join(__dirname, './db/db.json'),
+      path.join(__dirname, './Develop/db/db.json'),
       JSON.stringify({notes: noteArray}, null,2)
     )
     return newNote;
@@ -31,14 +33,32 @@ function deleteNote(id, notes) {
      
 
     fs.writeFileSync(
-      path.join(_dirname, './db/db.json'),
+      path.join(__dirname, './Develop/db/db.json'),
       JSON.stringify({notes: notes}, null, 2)
     )
     return notes;
 }
 
 
-app.listen(3001, () => {
+
+// get and post 
+ app.get('/', (req, res) => {
+   res.sendFile(path.join(__dirname, './Develop/public/index.html'))
+});
+
+
+app.get('/notes', (req, res) => {
+  res.sendFile(path.join(__dirname, './Develop/public/notes.html'));
+});
+
+ app.get('*', (req, res) => {
+   res.sendFile(path.join(__dirname, './Develop/public/index.html'))
+  })
+  
+  app.listen(3001, () => {
     console.log(`API server now on port 3001!`);
-  });
+});
+
+    
+
 

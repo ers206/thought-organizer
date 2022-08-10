@@ -13,7 +13,7 @@ I created the back end of this app using express. Then I connected the front end
 * CSS
 * Javascript
 * Express
-
+* JSON
 
 ## Website
 
